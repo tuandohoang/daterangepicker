@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+<h2>Index</h2>
+<input type="text" name="dataRange"value="" />
+<script type="text/javascript" charset="utf-8">
+
+        var start = moment().subtract(29, 'days');
+        var end = moment();
+
+    $('input[name="dataRange"]').daterangepicker({
+        startDate: start,
+        endDate: end,
+        ranges: {
+            'Today': [moment(), moment()],
+           'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+           'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+           'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+           'This Month': [moment().startOf('month'), moment().endOf('month')],
+           'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        }
+    });
+    $('input[name="dateRange"]').on('apply.daterangepicker', function (ev, picker) {
+        window.location.href = `/DateRangePicker/Index?start=${picker.startDate.format('D/MM/YYYY')}&end=${picker.startDate.format('D/MM/YYYY')}`
+    });
+    //<p>
+    //ViewBag.start
+    //ViewBag.end
+    //</p>
+   
+</script>
+
